@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>
+    /* Suchleiste */
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 3px solid #000;
+  }
+  
+  .search-container input[type="text"] {
+  width: 30%;
+  padding: 10px;
+  border: 1px solid #a5a5a5;
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: Bahnschrift, sans-serif;
+  margin-right: 5px;
+}
+
+  
+  .search-container button[type="submit"] {
+    background-color: #ea041a;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 20;
+    font-family: Bahnschrift, sans-serif;
+  }
+  
+  .first-select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: Bahnschrift, sans-serif;
+    margin-left: 20px;
+  }
+  .second-select {
+  margin-left: 10px; 
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: Bahnschrift, sans-serif;
+  margin-right: auto
+  }
+  
+  .item-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* new: evenly distribute items horizontally */
+    border: 1px solid #ffffff;
+    padding: 10px;
+    max-width: 100%; /* updated */
+    margin: 0 auto; /* center the container horizontally */
+  }
+  
+  .item-container2 {
+    display: flex;
+    flex: 0 0 calc(25% - 20px); /* new: set item width to one third of container, minus margin */
+    flex-wrap: wrap;
+    border: 1px solid #c1c1c1;
+    padding: 5px;
+    max-width: 100%; /* updated */
+    margin-bottom: 15px;
+
+  }
+
+  .item {
+    max-width: 100%; /* updated */
+    margin: 10px; /* margin between items */
+  }
+
+  .item img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .logo img {
+    max-height: 50px;
+    width: auto;
+  }
+  
+  .item h3, .item h4 {
+    padding: 1px;
+    margin: 0;
+    color: #000000;
+    font-family: Bahnschrift, sans-serif;
+  }
+  .item p{
+    padding: 1px;
+    margin: 0;
+    margin-bottom: 2px;
+    font-family: Bahnschrift, sans-serif;
+
+  }
+  
+  .item h3 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .item h4 {
+    font-size: 16px;
+    font-weight: normal;
+    color: #999;
+  }
+  
+  .item p {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #666;
+  }
+</style>
+  </head>
+  <body>
+    <div class="search-container">
+      <input type="text" placeholder="Suche...">
+      <button type="submit">Suchen</button>
+
+      <select class="first-select" id="furniture-type">
+        <option>Furniture Type</option>
+        <option>Table</option>
+        <option>Shelf</option>
+        <option>Dresser</option>
+        <option>Cabinet</option>
+        <option>Bed Frame</option>
+        <option>Desk</option>
+        <option>Wardrobe</option>
+        <option>Sideboard</option>
+        <option>Coffee Table</option>
+        <option>TV Stand</option>
+      </select>
+      <select class="second-select" id="quality-stage">
+        <option>Quality Stage</option>
+        <option>Good</option>
+        <option>Bad</option>
+      </select>
+
+      <div class="logo">
+        <img src="SG_logo.png" alt="Logo">
+      </div>
+       
+    </div>
+      
+      <div class="item-container" id="item-container">
+        <div class="item-container2">
+          <div class="item">
+            <img src="img1.jpg" alt="Bild 1">
+            <h3>Wood Chair</h3>
+            <h4>Chair</h4>
+            <p>Good</p>
+          </div>
+        </div>
+        <div class="item-container2">
+          <div class="item">
+            <img src="img2.jpg" alt="Bild 1">
+            <h3>Dining Table</h3>
+            <h4>Table</h4>
+            <p>Good</p>
+          </div>
+        </div>
+        <div class="item-container2">
+          <div class="item">
+            <img src="img3.jpg" alt="Bild 1">
+            <h3>Wooden Wardrobe</h3>
+            <h4>Wardrobe</h4>
+            <p>Bad</p>
+          </div>
+        </div>
+        <div class="item-container2">
+          <div class="item">
+            <img src="img4.jpg" alt="Bild 1">
+            <h3>Wood Dresser</h3>
+            <h4>Dresser</h4>
+            <p>Good</p>
+          </div>
+        </div>
+        <div class="item-container2">
+          <div class="item">
+            <img src="img5.jpg" alt="Bild 1">
+            <h3>Desk</h3>
+            <h4>Desk</h4>
+            <p>Good</p>
+          </div>
+        </div>
+        <div class="item-container2">
+          <div class="item">
+            <img src="img6.jpg" alt="Bild 1">
+            <h3>Bed Frame</h3>
+            <h4>Bed</h4>
+            <p>Bad</p>
+          </div>
+        </div>
+        <div class="item-container2">
+          <div class="item">
+            <img src="img7.jpg" alt="Bild 1">
+            <h3>Wooden Spinning Chair</h3>
+            <h4>Chair</h4>
+            <p>Bad</p>
+          </div>
+        </div>
+        <div class="item-container2">
+          <div class="item">
+            <img src="img8.jpg" alt="Bild 1">
+            <h3>Couch Table</h3>
+            <h4>Coffee Table</h4>
+            <p>Good</p>
+          </div>
+        </div>
+      </div>
+    <script>
+        const furnitureTypeSelect = document.getElementById('furniture-type');
+        const qualityStageSelect = document.getElementById('quality-stage');
+        const itemContainer = document.getElementById('item-container');
+      
+        function filterItems() {
+          const furnitureType = furnitureTypeSelect.value;
+          const qualityStage = qualityStageSelect.value;
+      
+          const items = itemContainer.querySelectorAll('.item-container2');
+          
+          items.forEach(item => {
+            const h4 = item.querySelector('h4').textContent;
+            const p = item.querySelector('p').textContent;
+            
+            if ((furnitureType === 'Furniture Type' || h4 === furnitureType) && (qualityStage === 'Quality Stage' || p === qualityStage)) {
+              item.style.display = 'flex';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        }
+      
+        furnitureTypeSelect.addEventListener('change', filterItems);
+        qualityStageSelect.addEventListener('change', filterItems);
+    </script>      
+  </body>
+</html>
