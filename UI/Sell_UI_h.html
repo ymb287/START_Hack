@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";
+      import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+      import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js";
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDH1fS8h2xjcRHiCJ3S-2qf4DJGKMDcwZ8",
+        authDomain: "hack-6e86b.firebaseapp.com",
+        projectId: "hack-6e86b",
+        storageBucket: "hack-6e86b.appspot.com",
+        messagingSenderId: "514002148775",
+        appId: "1:514002148775:web:0091286979b1430ef72a82",
+        measurementId: "G-C3JW9283FH"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const db = getFirestore(app);
+      const storage = getStorage(app);
+      async function uploadImageFile(file) {
+        const storageRef = ref(storage, `images/${file.name}`);
+        const snapshot = await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(snapshot.ref);
+        return downloadURL;
+      }
+
+    
+      window.addEventListener('DOMContentLoaded', () => {
+        const submitBtn = document.getElementById('submit-btn');
+        submitBtn.addEventListener('click', async () => {
+          console.log("Submit button clicked");
+
+          // Get the values from the form
+          const furnitureType = document.getElementById('furniture-type-central').value;
+          const height = heightSlider.value;
+          const width = widthSlider.value;
+          const length = lengthSlider.value;
+          const quality = document.getElementById('quality-stage-central').value;
+          const imageUpload = document.getElementById('image-upload');
+          const imageFile = imageUpload.files[0];
+
+          console.log(furnitureType, height, width, length, quality); // Check if the values are correct
+
+          if (imageFile) {
+            try {
+              const imageUrl = await uploadImageFile(imageFile);
+              console.log("Image uploaded successfully: ", imageUrl);
+
+              const docRef = await addDoc(collection(db, "furniture"), {
+                furnitureType,
+                height,
+                width,
+                length,
+                quality,
+                imageUrl
+              });
+
+              console.log("Document written with ID: ", docRef.id);
+            } catch (e) {
+              console.error("Error uploading image or adding document: ", e);
+            }
+          } else {
+            console.error("No image file selected");
+          }
+        });
+
+      });
+        
+    </script>    
+
+    <style>
+      body {
+        font-family: Bahnschrift, sans-serif;
+        display: flex; /* new: apply flexbox */
+        flex-direction: column; /* new: flex direction */
+        align-items: center; /* new: center horizontally */
+        justify-content: center; /* new: center vertically */
+        min-height: 100vh; /* new: set the minimum height to the full viewport height */
+        margin: 0; /* new: remove the default margin */
+      }
+
+      .logo {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        max-height: 50px;
+      }
+
+      .logo img {
+        max-height: 50px;
+        width: auto;
+        margin-right: 20px;
+      }
+
+      .logo2 img{
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        max-height: 50px;
+        width: auto;
+        margin-left: 20px;
+      }
+
+      .central-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f0f0f0;
+        padding: 40px 20px; /* erhöhter vertikaler padding */
+        margin-top: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        width: 40%; /* neue Breite */
+        margin: 0 auto; /* zentriert die Box */
+        min-height: 400 px
+      }
+
+      .central-box label {
+        margin: 10px 0;
+        font-size: 16px;
+      }
+
+      .central-box select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-top: 5px;
+        margin-bottom: 20px;
+      }
+
+      .central-box input[type="file"] {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
+      .slider-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between; /* new: adjust space between sliders */
+        width: 100%;
+        margin-bottom: 20px; /* new: add space below sliders */
+        
+      }
+
+      .slider-value {
+        font-size: 14px;
+        color: #333;
+        margin-top: 5px;
+        fill:#ea041a;
+        
+      }
+
+      .slider-range {
+        fill:#ea041a;
+        
+      }
+
+      .slider {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+      }
+
+      .central-box button[type="submit"] {
+        background-color: #ea041a;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 40px;
+        font-family: Bahnschrift, sans-serif;
+      }
+
+      
+      .change_button {
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #000000;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: Bahnschrift, sans-serif;
+}
+
+
+    </style>
+
+  </head>
+
+  <body>
+    <div class="logo2">
+      <img src="RF_logo.png" alt="Logo">
+    </div>
+
+    <a href="Ebay_UI_h.html">
+      <button class="change_button">Marked Place</button>
+    </a>
+
+
+    <div class="logo">
+      <img src="SG_logo.png" alt="Logo">
+    </div>
+    
+    <div class="central-box">
+      <label for="furniture-type">Furniture Type:</label>
+      <select class="first-select" id="furniture-type-central">
+        <option>Table</option>
+        <option>Shelf</option>
+        <option>Dresser</option>
+        <option>Cabinet</option>
+        <option>Bed Frame</option>
+        <option>Desk</option>
+        <option>Wardrobe</option>
+        <option>Sideboard</option>
+        <option>Coffee Table</option>
+        <option>TV Stand</option>
+        <option>Chair</option>
+      </select>
+
+      <div class="slider-container">
+        <div class="slider">
+          <label for="height">Height:</label>
+          <input type="range" id="height" min="0" max="300" step="1">
+          <div class="slider-value" id="height-value">0</div> <!-- new: display the slider value -->
+        </div>
+        <div class="slider">
+          <label for="width">Width:</label>
+          <input type="range" id="width" min="0" max="300" step="1">
+          <div class="slider-value" id="width-value">0</div> <!-- new: display the slider value -->
+        </div>
+        <div class="slider">
+          <label for="length">Length:</label>
+          <input type="range" id="length" min="0" max="300" step="1">
+          <div class="slider-value" id="length-value">0</div> <!-- new: display the slider value -->
+        </div>
+      </div>
+
+            <label for="quality-stage">Condition:</label>
+            <select class="second-select" id="quality-stage-central">
+              <option>Good</option>
+              <option>Medium</option>
+              <option>Bad</option>
+            </select>
+
+            <label for="image-upload">Upload Picture:</label>
+            <input type="file" id="image-upload">
+            <button type="submit" id="submit-btn">Submit</button>
+          </div>
+
+          <script>
+            // Function to update the slider value text
+            function updateSliderValue(sliderId, valueId) {
+              const slider = document.getElementById(sliderId);
+              const valueElement = document.getElementById(valueId);
+
+              valueElement.textContent = slider.value;
+            }
+
+            // Get the slider elements and update their values initially
+            const heightSlider = document.getElementById('height');
+            const widthSlider = document.getElementById('width');
+            const lengthSlider = document.getElementById('length');
+
+            updateSliderValue('height', 'height-value');
+            updateSliderValue('width', 'width-value');
+            updateSliderValue('length', 'length-value');
+
+      // Add event listeners to the sliders to update their values when they are changed
+      heightSlider.addEventListener('input', () => {
+        updateSliderValue('height', 'height-value');
+      });
+
+      widthSlider.addEventListener('input', () => {
+        updateSliderValue('width', 'width-value');
+      });
+
+      lengthSlider.addEventListener('input', () => {
+        updateSliderValue('length', 'length-value');
+      });
+
+      async function addFurnitureDocument() {
+      // Create a new document in the "furniture" collection
+      try {
+        const docRef = await addDoc(collection(db, "furniture"), {
+          furnitureType,
+          height,
+          width,
+          length,
+          quality
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    }
+
+
+      </script>
+    </body>
+</html>
+
+
